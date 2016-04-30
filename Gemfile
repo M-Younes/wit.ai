@@ -7,9 +7,7 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
-
-gem 'mysql2'
-
+gem 'puma'
 gem 'rails_12factor', group: :production
 
 # To use ActiveModel has_secure_password
