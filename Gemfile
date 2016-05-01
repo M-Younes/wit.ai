@@ -6,7 +6,7 @@ gem 'rails', '4.2.5.1'
 gem 'rails-api'
 
 gem 'spring', :group => :development
-
+gem 'config'
 gem 'puma'
 gem 'rails_12factor', group: :production
 
