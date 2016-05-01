@@ -5,7 +5,8 @@ class MessagesController < ApplicationController
 	end
 
 	def webhook
-		Rails.logger.info "<<<<<<<<#{params.inspect}"
+		return params["hub.challenge"] if params["hub.verify_token"].to_s == Digest::SHA1.hexdigest(Settings.token)
+		'Error, wrong validation token'
 	end
 
 end
