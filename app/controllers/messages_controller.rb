@@ -8,9 +8,9 @@ class MessagesController < ApplicationController
 		unless messages.length.zero?
 			messages.each do |event|
 				if event["message"] && event["message"]["text"]
-					text = Hash.new
-					text['text'] = "Echo: " + event["message"]["text"].to_s
-					send_message(sender_id,text)
+					text = event["message"]["text"].to_s
+					FacebookBot.new.send_text_message(sender_id, "Echo + #{text}")
+					# send_message(sender_id,text)
 				end
 			end
 		end

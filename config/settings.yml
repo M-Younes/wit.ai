@@ -1,3 +1,3 @@
 token: c7329b36a0495cf910391ad2e5f975504b63b59e
 fb_page_access_token: EAACSXNMtzvABAC6vVDmC6rrEupCXJwrLZAH2pcPp8BfQpKYp36ZB2ZB8KYztyKcdjNkZABpWVEGntYdv7l3PJgd4Guq4zn0kzkZA8EUP0UXXbsIWSGnZCxzSD8ZActC7IUFhY3vs8zEPPHivCKrIRJ0rKL4glqdHM39ODyQzqpFPAZDZD
-fb_url: https://graph.facebook.com/v2.6/me/messages
+fb_url: https://graph.facebook.com/v2.6/me/messages?access_token=
