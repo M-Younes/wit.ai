@@ -7,9 +7,9 @@ class MessagesController < ApplicationController
 	def webhook
 		challenge = params["hub.challenge"] 
 		if params["hub.verify_token"].to_s == Digest::SHA1.hexdigest(Settings.token)
-			render :json => { :params["hub.challenge"] => challenge}, :status => 200
+			render :json => challenge, :status => 200
 		else
-			render :json => { :error => "Error, wrong validation token" }, :status => 406
+			render :json => "Error, wrong validation token", :status => 406
 		end
 	end
 
