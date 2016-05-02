@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
 				end
 			end
 		end
-		render json: status: 200
+		render status: 200
 	end
 
 	def webhook
