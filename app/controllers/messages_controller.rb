@@ -2,6 +2,7 @@ class MessagesController < ApplicationController
 
 	def index
 		Rails.logger.info "<<<<<<<<#{params.inspect}"
+		Rails.logger.info "<<<<<<<<#{req.inspect}"
 		render json: "test", status: 200
 	end
 
