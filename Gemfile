@@ -7,6 +7,7 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 gem 'config'
+gem 'httparty'
 gem 'puma'
 gem 'rails_12factor', group: :production
 

@@ -46,6 +46,9 @@ GEM
     erubis (2.7.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
     loofah (2.0.3)
@@ -57,6 +60,7 @@ GEM
     mime-types-data (3.2016.0221)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
+    multi_xml (0.5.5)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     puma (3.4.0)
@@ -114,6 +118,7 @@ PLATFORMS
 
 DEPENDENCIES
   config
+  httparty
   puma
   rails (= 4.2.5.1)
   rails-api
