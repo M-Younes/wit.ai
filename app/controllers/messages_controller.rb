@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
 				end
 			end
 		end
-		render json:, status: 200
+		render json: status: 200
 	end
 
 	def webhook
@@ -32,7 +32,7 @@ class MessagesController < ApplicationController
 		HTTParty.post(Settings.fb_url,
 			:qs => {access_token: Settings.fb_page_access_token},
 			:json => {
-					:recipient => {:id => recipient_id}
+					:recipient => {:id => recipient_id},
 					:message => text
 				}
 			)
