@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
 				end
 			end
 		end
-		render status: 200
+		render :nothing => true, :status => 200
 	end
 
 	def webhook
