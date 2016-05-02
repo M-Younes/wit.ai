@@ -1,7 +1,8 @@
 class MessagesController < ApplicationController
 
 	def index
-		render json: "agent", status: 200
+		Rails.logger.info "<<<<<<<<#{params.inspect}"
+		render json: "test", status: 200
 	end
 
 	def webhook
