@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
 			messages.each do |event|
 				if event["message"] && event["message"]["text"]
 					text = event["message"]["text"].to_s
-					FacebookBot.new.send_text_message(sender_id, "Echo + #{text}")
+					FacebookBot.new.send_generic_message(sender_id, "This is a bot testing. Echo" + "#{text}")
 				end
 			end
 		end
