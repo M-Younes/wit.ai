@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+	require 'wit'
 
 	def index
 		messages = params["entry"].first["messaging"]
