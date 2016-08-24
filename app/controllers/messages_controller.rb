@@ -25,3 +25,16 @@ class MessagesController < ApplicationController
 	end
 
 end
+
+
+# actions = {
+#   :say => -> (session_id, context, msg) {
+#     p msg
+#   },
+#   :merge => -> (session_id, context, entities, msg) {
+#     return context
+#   },
+#   :error => -> (session_id, context, error) {
+#     p error.message
+#   },
+# }

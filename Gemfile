@@ -9,6 +9,7 @@ gem 'spring', :group => :development
 gem 'config'
 gem 'puma'
 gem 'wit'
+gem 'messenger-ruby'
 gem 'rails_12factor', group: :production
 
 # To use ActiveModel has_secure_password

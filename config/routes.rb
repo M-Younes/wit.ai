@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # root 'messages#index'
   get 'webhook' => 'messages#webhook', as: :webhook
   post 'webhook' => 'messages#index'
+  mount Messenger::Engine, at: "/messenger"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
