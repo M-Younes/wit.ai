@@ -21,7 +21,7 @@ class MessengerController < Messenger::MessengerController
 	def send_text_message(user_id, message)
 	  Messenger::Client.send(
 	    Messenger::Request.new(
-	      Messenger::Elements::Text.new(text: 'Testing bot echo '+'message'),user_id)
+	      Messenger::Elements::Text.new(text: message),user_id)
 	  )		
 	end
 
