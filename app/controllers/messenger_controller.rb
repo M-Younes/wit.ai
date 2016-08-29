@@ -27,8 +27,10 @@ require 'open_weather'
   	return context
 	},  
 }	
-client = Wit.new(access_token: Settings.wit_access_token, actions: actions)
-					client.interactive
+					client = Wit.new(access_token: Settings.wit_access_token, actions: actions)
+					session = 'my-user-session-42'
+					context0 = {}
+					context1 = client.run_actions(session, text, context0)
 					# send_text_message(sender_id, "I am still under deveolpment :D")
 					# send_text_message(sender_id, "Meanwhile, here is the top 3 stories from Says.com ")
 					# send_bubbles(sender_id)
@@ -37,25 +39,6 @@ client = Wit.new(access_token: Settings.wit_access_token, actions: actions)
 		end
 		render :nothing => true, :status => 200		
 	end
-	actions = {
-  send: -> (request, response) {
-    puts("sending... #{response['text']}")
-  },
-	getForecast: -> (request) {
-  	context = request['context']
-  	entities = request['entities']
-
-  	loc = first_entity_value(entities, 'location')
-  	if loc
-      context['forecast'] = get_weather(loc)
-  	else
-      context['missingLocation'] = true
-      context.delete('forecast')
-  	end
-  	return context
-	},  
-}
-
 
 	def send_text_message(user_id, message)
 	  Messenger::Client.send(
