@@ -9,7 +9,24 @@ require 'open_weather'
 			messages.each do |event|
 				if event["message"] && event["message"]["text"]
 					text = event["message"]["text"].to_s
-					actions = get_actions
+					actions = {
+					  	send: -> (request, response) {
+					    	puts("sending... #{response['text']}")
+					  	},
+					  	getForecast: -> (request) {
+					    	context = request['context']
+					    	entities = request['entities']
+
+					    	loc = first_entity_value(entities, 'location')
+					    	if loc
+					        context['forecast'] = get_weather(loc)
+					    	else
+					        context['missingLocation'] = true
+					        context.delete('forecast')
+					    	end
+					    	return context
+					  	},
+						}
 					client = Wit.new(access_token: Settings.wit_access_token, actions: actions)
 					client.interactive
 					# send_text_message(sender_id, "Welcome to Says facebook bot..")
@@ -76,25 +93,7 @@ require 'open_weather'
 	end
 
 	def get_actions 
-		actions = {
-	  	send: -> (request, response) {
-	    	puts("sending... #{response['text']}")
-	  	},
-	  	getForecast: -> (request) {
-	    	context = request['context']
-	    	entities = request['entities']
 
-	    	loc = first_entity_value(entities, 'location')
-	    	if loc
-	        context['forecast'] = get_weather(loc)
-	    	else
-	        context['missingLocation'] = true
-	        context.delete('forecast')
-	    	end
-	    	return context
-	  	},
-		}
-		actions
 	end
 
 
