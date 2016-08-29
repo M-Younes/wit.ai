@@ -28,4 +28,3 @@ gem 'rails_12factor', group: :production
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
-users2 = users.select {|user| !user['user_id'].nil? && user['user_id'].length <= 7}
