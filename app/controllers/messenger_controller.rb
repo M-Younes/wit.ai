@@ -28,7 +28,6 @@ require 'open_weather'
 	},  
 }	
 client = Wit.new(access_token: Settings.wit_access_token, actions: actions)
-					client = Wit.new Settings.wit_access_token, actions
 					client.interactive
 					# send_text_message(sender_id, "I am still under deveolpment :D")
 					# send_text_message(sender_id, "Meanwhile, here is the top 3 stories from Says.com ")
