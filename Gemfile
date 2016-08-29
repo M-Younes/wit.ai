@@ -8,7 +8,7 @@ gem 'rails-api'
 gem 'spring', :group => :development
 gem 'config'
 gem 'puma'
-gem 'wit'
+gem 'wit', '4.1.0'
 gem 'messenger-ruby'
 gem 'httparty'
 gem 'open-weather'
