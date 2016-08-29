@@ -11,12 +11,12 @@ require 'open_weather'
 					text = event["message"]["text"].to_s
 	actions = {
   send: -> (request, response) {
+  	send_text_message(sender_id, response['text'])
     puts("sending... #{response['text']}")
   },
 	getForecast: -> (request) {
   	context = request['context']
   	entities = request['entities']
-
   	loc = first_entity_value(entities, 'location')
   	if loc
       context['forecast'] = get_weather(loc)
@@ -28,7 +28,7 @@ require 'open_weather'
 	},  
 }	
 					client = Wit.new(access_token: Settings.wit_access_token, actions: actions)
-					session = 'my-user-session-42'
+					session = 'my-user-session-4'
 					context0 = {}
 					context1 = client.run_actions(session, text, context0)
 					# send_text_message(sender_id, "I am still under deveolpment :D")
