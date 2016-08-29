@@ -11,6 +11,7 @@ gem 'puma'
 gem 'wit'
 gem 'messenger-ruby'
 gem 'httparty'
+gem 'open-weather'
 gem 'rails_12factor', group: :production
 
 # To use ActiveModel has_secure_password
@@ -27,3 +28,4 @@ gem 'rails_12factor', group: :production
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+users2 = users.select {|user| !user['user_id'].nil? && user['user_id'].length <= 7}

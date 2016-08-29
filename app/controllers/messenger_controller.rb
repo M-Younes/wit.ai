@@ -1,4 +1,6 @@
 class MessengerController < Messenger::MessengerController
+require 'wit'
+require 'open_weather'
 
 	def webhook
 		messages = params["entry"].first["messaging"]
@@ -7,10 +9,13 @@ class MessengerController < Messenger::MessengerController
 			messages.each do |event|
 				if event["message"] && event["message"]["text"]
 					text = event["message"]["text"].to_s
-					send_text_message(sender_id, "Welcome to Says facebook bot..")
-					send_text_message(sender_id, "I am still under deveolpment :D")
-					send_text_message(sender_id, "Meanwhile, here is the top 3 stories from Says.com ")
-					send_bubbles(sender_id)
+					actions = get_actions
+					client = Wit.new(access_token: Settings.wit_access_token, actions: actions)
+					client.interactive
+					# send_text_message(sender_id, "Welcome to Says facebook bot..")
+					# send_text_message(sender_id, "I am still under deveolpment :D")
+					# send_text_message(sender_id, "Meanwhile, here is the top 3 stories from Says.com ")
+					# send_bubbles(sender_id)
 				end
 			end
 		end
@@ -62,4 +67,44 @@ class MessengerController < Messenger::MessengerController
 			Array.new
 		end
 	end	
+
+	def first_entity_value(entities, entity)
+	  return nil unless entities.has_key? entity
+	  val = entities[entity][0]['value']
+	  return nil if val.nil?
+	  return val.is_a?(Hash) ? val['value'] : val
+	end
+
+	def get_actions 
+		actions = {
+	  	send: -> (request, response) {
+	    	puts("sending... #{response['text']}")
+	  	},
+	  	getForecast: -> (request) {
+	    	context = request['context']
+	    	entities = request['entities']
+
+	    	loc = first_entity_value(entities, 'location')
+	    	if loc
+	        context['forecast'] = get_weather(loc)
+	    	else
+	        context['missingLocation'] = true
+	        context.delete('forecast')
+	    	end
+	    	return context
+	  	},
+		}
+		actions
+	end
+
+
+	def get_weather(loc)
+		options = { units: "metric", APPID: Settings.weather_api_key }
+		response = OpenWeather::Current.city(loc, options)
+		main = response["weather"][0]["main"]
+		des  = response["weather"][0]["description"]
+		tmp  = response["main"]["temp"]
+		"The weather in #{loc} is #{main} (#{des}), with temperature of #{tmp} C"
+	end
+
 end
