@@ -2,6 +2,8 @@ class MessengerController < Messenger::MessengerController
 require 'wit'
 require 'open_weather'
 
+before_filter :get_actions
+
 	def webhook
 		messages = params["entry"].first["messaging"]
 		sender_id = fb_params.first_entry.sender_id

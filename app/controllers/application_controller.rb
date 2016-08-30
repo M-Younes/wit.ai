@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-	before_filter :get_actions
+	
 
 
 	def get_actions
