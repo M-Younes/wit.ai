@@ -76,8 +76,26 @@ before_filter :get_actions
 	  return val.is_a?(Hash) ? val['value'] : val
 	end
 
-	def get_actions 
-
+	def get_actions
+		return @actions if @actions
+		@actions = {
+		  send: -> (request, response) {
+		  	send_text_message(sender_id, response['text'])
+		  	},
+			getForecast: -> (request) {
+		  	context = request['context']
+		  	entities = request['entities']
+		  	loc = first_entity_value(entities, 'location')
+		  	if loc
+		      context['forecast'] = get_weather(loc)
+		  	else
+		      context['missingLocation'] = true
+		      context.delete('forecast')
+		  	end
+		  	return context
+			},  
+		}
+		@actions
 	end
 
 
