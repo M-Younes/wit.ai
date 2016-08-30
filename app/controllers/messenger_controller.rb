@@ -2,8 +2,6 @@ class MessengerController < Messenger::MessengerController
 require 'wit'
 require 'open_weather'
 
-before_filter :get_actions
-
 	def webhook
 		messages = params["entry"].first["messaging"]
 		sender_id = fb_params.first_entry.sender_id
@@ -11,7 +9,8 @@ before_filter :get_actions
 			messages.each do |event|
 				if event["message"] && event["message"]["text"]
 					text = event["message"]["text"].to_s
-					client = Wit.new(access_token: Settings.wit_access_token, actions: @actions)
+					actions = get_actions(sender_id)
+					client = Wit.new(access_token: Settings.wit_access_token, actions: actions)
 					session = 'my-user-session-4'
 					context0 = {}
 					context1 = client.run_actions(session, text, context0)
@@ -76,7 +75,7 @@ before_filter :get_actions
 	  return val.is_a?(Hash) ? val['value'] : val
 	end
 
-	def get_actions
+	def get_actions(sender_id)
 		return @actions if @actions
 		@actions = {
 		  send: -> (request, response) {
