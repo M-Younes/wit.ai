@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
 
 
 	def get_actions
+		puts "_____________hello__________"
 		@actions = {
 		  send: -> (request, response) {
 		  	send_text_message(sender_id, response['text'])
@@ -20,6 +21,7 @@ class ApplicationController < ActionController::API
 		  	return context
 			},  
 		}
+		@actions
 	end
 	
 end
