@@ -4,30 +4,12 @@ require 'open_weather'
 
 	def webhook
 		messages = params["entry"].first["messaging"]
-		sender_id = messages.first["sender"]["id"]
+		sender_id = fb_params.first_entry.sender_id
 		unless messages.length.zero?
 			messages.each do |event|
 				if event["message"] && event["message"]["text"]
 					text = event["message"]["text"].to_s
-	actions = {
-  send: -> (request, response) {
-  	send_text_message(sender_id, response['text'])
-    puts("sending... #{response['text']}")
-  },
-	getForecast: -> (request) {
-  	context = request['context']
-  	entities = request['entities']
-  	loc = first_entity_value(entities, 'location')
-  	if loc
-      context['forecast'] = get_weather(loc)
-  	else
-      context['missingLocation'] = true
-      context.delete('forecast')
-  	end
-  	return context
-	},  
-}	
-					client = Wit.new(access_token: Settings.wit_access_token, actions: actions)
+					client = Wit.new(access_token: Settings.wit_access_token, actions: @actions)
 					session = 'my-user-session-4'
 					context0 = {}
 					context1 = client.run_actions(session, text, context0)
